@@ -1,0 +1,67 @@
+# Default configuration for volatility forecasting framework
+
+# Data settings
+data:
+  default_start: "2018-01-01"
+  default_end: null  # Use current date if null
+  cache_dir: "data/cache"
+  
+# Model configurations
+models:
+  garch:
+    p: 1
+    q: 1
+    dist: "normal"
+    mean_model: "Constant"
+  
+  egarch:
+    p: 1
+    o: 1
+    q: 1
+    dist: "normal"
+  
+  gjr_garch:
+    p: 1
+    o: 1
+    q: 1
+    dist: "normal"
+
+# Evaluation settings
+evaluation:
+  initial_window: 252  # One year of trading days
+  refit_frequency: 22  # Refit monthly (22 trading days)
+  min_observations: 100
+  step_size: 1
+  forecast_horizon: 1
+
+# Delta hedging settings
+hedging:
+  risk_free_rate: 0.05  # 5% annual risk-free rate
+  transaction_cost: 0.001  # 10 basis points
+  rebalance_frequency: "daily"
+
+# Realized volatility settings
+realized_volatility:
+  annualization_factor: 252
+  default_window: 20
+  ewma_alpha: 0.94
+
+# Output settings
+output:
+  results_dir: "results"
+  save_plots: true
+  plot_format: "png"
+  dpi: 300
+
+# Logging settings
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+
+# Visualization settings
+visualization:
+  figure_size: [12, 8]
+  style: "seaborn-v0_8"
+  color_palette: "husl"
+  grid_alpha: 0.3
